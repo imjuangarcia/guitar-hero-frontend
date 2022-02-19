@@ -1,0 +1,11 @@
+.Container button {
+  opacity: 0;
+}
+
+.Container:hover button {
+  opacity: 1;
+}
+
+.Container:hover a:first-child {
+  opacity: .7;
+}

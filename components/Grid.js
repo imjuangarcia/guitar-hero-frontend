@@ -5,6 +5,9 @@ import { StarIcon, ViewOffIcon } from '@chakra-ui/icons';
 // Content
 import meli from '../data/meli.json';
 
+// Styles
+import styles from './grid.module.css';
+
 export default function ProductGrid() {
   return (
     <Grid templateColumns='repeat(4, 1fr)' gap={4} mt="4">
@@ -15,8 +18,15 @@ export default function ProductGrid() {
           borderWidth="1px"
           borderColor="gray.100"
           borderRadius="8"
+          className={styles.Container}
         >
-          <Link href={guitar.url} target="_blank" rel="noopener noreferrer" display="block" position="relative">
+          <Link
+            href={guitar.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            display="block"
+            position="relative"
+          >
             <IconButton
               aria-label='Favorite this guitar'
               icon={<StarIcon />}
@@ -29,6 +39,10 @@ export default function ProductGrid() {
               position="absolute"
               top="2"
               right="14"
+              _hover={{
+                background: "white",
+                color: "yellow.400",
+              }}
             />
             <IconButton
               aria-label='Hide this guitar'
@@ -42,6 +56,10 @@ export default function ProductGrid() {
               position="absolute"
               top="2"
               right="2"
+              _hover={{
+                background: "white",
+                color: "gray.500",
+              }}
             />
             <Image
               src={guitar.image}
@@ -53,11 +71,20 @@ export default function ProductGrid() {
               borderTopRightRadius="8"
             />
           </Link>
-          <Link href={guitar.url} target="_blank" rel="noopener noreferrer" p="2" display="block">
-            <Heading size="sm" color="gray.900">
+          <Link
+            href={guitar.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            display="block"
+            p="2"
+            _hover={{
+              textDecoration: 'none'
+            }}
+          >
+            <Heading size="sm" color="gray.900" mt="1">
               {guitar.title}
             </Heading>
-            <Text mt="2" color="gray.600">
+            <Text mt="1" color="gray.600">
               ${guitar.price}
             </Text>
           </Link>

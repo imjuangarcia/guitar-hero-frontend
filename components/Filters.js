@@ -8,7 +8,19 @@ export default function Filters() {
         <Text fontWeight="semibold" fontSize="xs" textTransform="uppercase" color="gray.600" letterSpacing="1px">
           Filters
         </Text>
-        <Button leftIcon={<ViewIcon />} bgColor="transparent" fontSize="xs" textTransform="uppercase" color="gray.400" letterSpacing="1px" ml="auto">
+        <Button
+          leftIcon={<ViewIcon />}
+          bgColor="transparent"
+          fontSize="xs"
+          textTransform="uppercase"
+          color="gray.400"
+          letterSpacing="1px"
+          ml="auto"
+          _hover={{
+            background: "transparent",
+            color: "gray.600",
+          }}
+        >
           Show hidden entries
         </Button>
       </Flex>
