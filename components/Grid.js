@@ -10,7 +10,11 @@ import styles from './grid.module.css';
 
 export default function ProductGrid() {
   return (
-    <Grid templateColumns='repeat(4, 1fr)' gap={4} mt="4">
+    <Grid
+      templateColumns={{ sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' }}
+      gap={4}
+      mt="4"
+    >
       {meli.map((guitar, index) => 
         <GridItem
           key={index}

@@ -16,6 +16,8 @@ export default function Filters() {
           color="gray.400"
           letterSpacing="1px"
           ml="auto"
+          h="auto"
+          p="0"
           _hover={{
             background: "transparent",
             color: "gray.600",
@@ -30,9 +32,20 @@ export default function Filters() {
         borderRadius="4"
         p="2"
         align="baseline"
+        direction={{ base: 'column', md: 'row'}}
       >
-        <WrapItem pl="2">
-          <Flex align="baseline">
+        <WrapItem
+          pl={{ base: "0", md: '2' }}
+          pb={{ base: '2', md: '0' }}
+          pr={{ base: '2', md: '0' }}
+          w={{ base: 'full', md: 'auto' }}
+        >
+          <Flex
+            align="baseline"
+            direction={{ base: 'column', md: 'row'}}
+            w="full"
+            m="0"
+          >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Condition:</Text>
             <Select bgColor="white" size="sm" borderRadius="2">
               <option value='all'>All</option>
@@ -41,8 +54,18 @@ export default function Filters() {
             </Select>
           </Flex>
         </WrapItem>
-        <WrapItem pl="2">
-          <Flex align="baseline">
+        <WrapItem
+          pl={{ base: "0", md: '2' }}
+          pb={{ base: '2', md: '0' }}
+          pr={{ base: '2', md: '0' }}
+          w={{ base: 'full', md: 'auto' }}
+        >
+          <Flex
+            align="baseline"
+            direction={{ base: 'column', md: 'row'}}
+            w="full"
+            m="0"
+          >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Provider:</Text>
             <Select bgColor="white" size="sm" borderRadius="2">
               <option value='all'>All</option>
@@ -50,9 +73,20 @@ export default function Filters() {
             </Select>
           </Flex>
         </WrapItem>
-        <WrapItem pl="2">
-          <Flex align="baseline">
-            <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Price Range:</Text>
+        <WrapItem
+          pl={{ base: "0", md: '2' }}
+          flexDirection={{ base: 'column', md: 'row'}}
+          pb={{ base: '2', md: '0' }}
+          pr={{ base: '2', md: '0' }}
+          w={{ base: 'full', md: 'auto' }}
+          alignItems="baseline"
+        >
+          <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Price Range:</Text>
+          <Flex
+            align="baseline"
+            w={{ base: 'full', md: 'auto' }}
+            m="0"
+          >
             <Text fontSize='sm' mr="2" color="gray.400">0</Text>
             <RangeSlider aria-label={['min', 'max']} defaultValue={[0, 2000000]} onChangeEnd={(val) => console.log(val)} minW="160" flex="1" ml="2" mr="2">
               <RangeSliderTrack>
@@ -64,7 +98,13 @@ export default function Filters() {
             <Text fontSize='sm' ml="2" color="gray.400">2000000</Text>
           </Flex>
         </WrapItem>
-        <WrapItem pl="8" flex="1">
+        <WrapItem
+          pl={{ base: "0", md: '2' }}
+          pr={{ base: "2", md: '0' }}
+          w="full"
+          m="0"
+          flex="1"
+        >
           <InputGroup size="sm">
             <InputLeftElement
               pointerEvents='none'

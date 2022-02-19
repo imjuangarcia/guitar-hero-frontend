@@ -1,11 +1,13 @@
-.Container button {
-  opacity: 0;
-}
-
-.Container:hover button {
-  opacity: 1;
-}
-
-.Container:hover a:first-child {
-  opacity: .7;
+@media screen and (min-width: 62em) {
+  .Container button {
+    opacity: 0;
+  }
+  
+  .Container:hover button {
+    opacity: 1;
+  }
+  
+  .Container:hover a:first-child {
+    opacity: .7;
+  }
 }
