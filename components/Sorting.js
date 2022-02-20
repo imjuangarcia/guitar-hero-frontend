@@ -1,6 +1,9 @@
-import { Text, Box, Grid, GridItem, Select, Flex } from '@chakra-ui/react';
+import { Text, Box, Grid, GridItem, Select, Flex, Input, InputLeftElement, InputGroup } from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 
 export default function Sorting({
+  sorting,
+  sortEntries
 }) {
   return (
     <Box mt="8">
@@ -34,7 +37,18 @@ export default function Sorting({
             </Select>
           </Flex>
         </GridItem>
-        <GridItem colStart={{ sm: 'auto', md: '2', lg: '3', xl: '4' }}>
+        <GridItem
+          colSpan={{ base: 'auto', xl: '2' }}
+        >
+          <InputGroup size="sm">
+            <InputLeftElement
+              pointerEvents='none'
+              children={<SearchIcon color='gray.300' />}
+            />
+            <Input type='search' placeholder='Search' bgColor="white" />
+          </InputGroup>
+        </GridItem>
+        <GridItem>
           <Flex
             align="baseline"
             justify="flex-end"
@@ -51,7 +65,14 @@ export default function Sorting({
             >
               Sort by:
             </Text>
-            <Select size="sm" borderRadius="2" flex="1" variant="flushed" color="gray.700">
+            <Select
+              size="sm"
+              borderRadius="2"
+              flex="1"
+              variant="flushed"
+              color="gray.700"
+              onChange={(e) => sortEntries(e.target.value)}
+            >
               <option value='none'>None</option>
               <option value='price-asc'>Price Ascending</option>
               <option value='price-desc'>Price Descending</option>

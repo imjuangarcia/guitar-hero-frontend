@@ -14,6 +14,7 @@ import meli from '../data/meli.json';
 export default function Home() {
   // State definition
   const [data, setData] = useState(meli);
+  const [sorting, setSorting] = useState('none');
   const [filters, setFilters] = useState({
     condition: 'all',
     provider: 'all',
@@ -46,6 +47,23 @@ export default function Home() {
     }  
   }
 
+  // Function to sort the JSON data based on the parameters selected
+  const sortEntries = (value) => {
+    setSorting(value);
+
+    switch(value) {
+      case 'price-asc':
+        data.sort((a, b) => a.price > b.price ? 1 : -1);
+        break;
+      case 'price-desc':
+        data.sort((a, b) => a.price > b.price ? -1 : 1);
+        break;
+      case 'none':
+        data.sort((a, b) => a.order > b.order ? 1 : -1);
+        break;
+    }
+  }
+
   return (
     <Base>
       <Header />
@@ -57,6 +75,8 @@ export default function Home() {
         data={data}
       />
       <Sorting
+        sorting={sorting}
+        sortEntries={sortEntries}
       />
       <Grid
         data={data}

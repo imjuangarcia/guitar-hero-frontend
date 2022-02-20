@@ -1,5 +1,5 @@
-import { Text, Box, Wrap, WrapItem, Flex, Select, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, Button, Input, InputLeftElement, InputGroup } from '@chakra-ui/react';
-import { ViewIcon, ViewOffIcon, SearchIcon } from '@chakra-ui/icons';
+import { Text, Box, Wrap, WrapItem, Flex, Select, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, Button } from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 export default function Filters({
   filters,
@@ -121,14 +121,14 @@ export default function Filters({
             m="0"
             flex="1"
           >
-            <Text fontSize='sm' mr="2" color="gray.400" minW="72px">${filters.priceRange[0]}</Text>
+            <Text fontSize='sm' mr="2" color="gray.400" minW={{ base: 'none', md: "72px" }}>${filters.priceRange[0]}</Text>
             <RangeSlider
               aria-label={['min', 'max']}
               defaultValue={[0, 1200000]}
               min={0}
               max={1200000}
               onChange={(val) => filterEntries('priceRange', val)}
-              minW="160"
+              minW={{ base: 'none', md: "160" }}
               flex="1"
               ml="2"
               mr="2"
@@ -140,24 +140,9 @@ export default function Filters({
               <RangeSliderThumb index={0} />
               <RangeSliderThumb index={1} />
             </RangeSlider>
-            <Text fontSize='sm' ml="2" color="gray.400" minW="72px">${filters.priceRange[1]}</Text>
+            <Text fontSize='sm' ml="2" color="gray.400" minW={{ base: 'none', md: "72px" }}>${filters.priceRange[1]}</Text>
           </Flex>
         </WrapItem>
-        {/* <WrapItem
-          pl={{ base: "0", md: '2' }}
-          pr={{ base: "2", md: '0' }}
-          w="full"
-          m="0"
-          flex="1"
-        >
-          <InputGroup size="sm">
-            <InputLeftElement
-              pointerEvents='none'
-              children={<SearchIcon color='gray.300' />}
-            />
-            <Input type='search' placeholder='Search' bgColor="white" />
-          </InputGroup>
-        </WrapItem> */}
       </Wrap>
     </Box>
   )
