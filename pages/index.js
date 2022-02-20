@@ -17,10 +17,7 @@ export default function Home() {
   const [filters, setFilters] = useState({
     condition: 'all',
     provider: 'all',
-    priceRange: [{
-      min: 0,
-      max: 2000000
-    }],
+    priceRange: [0, 1200000],
     showHidden: false
   });
 
@@ -34,6 +31,15 @@ export default function Home() {
       case 'condition':
         if(value === 'all') return setData(meli);
         setData(meli.filter(product => product.type === value));
+        break;
+      // 2. Filter by product provider
+      case 'provider':
+        if(value === 'all') return setData(meli);
+        setData(meli.filter(product => product.source === value));
+        break;
+      // 3. Filter by price range
+      case 'priceRange':
+        setData(meli.filter(product => product.price > value[0] && product.price < value[1]));
         break;
       // default:
         // TBD

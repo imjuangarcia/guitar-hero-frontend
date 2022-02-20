@@ -93,7 +93,13 @@ export default function Filters({
             m="0"
           >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Provider:</Text>
-            <Select bgColor="white" size="sm" borderRadius="2" color="gray.700">
+            <Select
+              bgColor="white"
+              size="sm"
+              borderRadius="2"
+              color="gray.700"
+              onChange={(e) => filterEntries('provider', e.target.value)}
+            >
               <option value='all'>All ({rawData.length})</option>
               <option value='meli'>Meli ({rawData.filter(item => item.source === 'meli').length})</option>
             </Select>
@@ -106,25 +112,38 @@ export default function Filters({
           pr={{ base: '2', md: '0' }}
           w={{ base: 'full', md: 'auto' }}
           alignItems="baseline"
+          flex="1"
         >
           <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Price Range:</Text>
           <Flex
             align="baseline"
             w={{ base: 'full', md: 'auto' }}
             m="0"
+            flex="1"
           >
-            <Text fontSize='sm' mr="2" color="gray.400">0</Text>
-            <RangeSlider aria-label={['min', 'max']} defaultValue={[0, 2000000]} onChangeEnd={(val) => console.log(val)} minW="160" flex="1" ml="2" mr="2">
+            <Text fontSize='sm' mr="2" color="gray.400" minW="72px">${filters.priceRange[0]}</Text>
+            <RangeSlider
+              aria-label={['min', 'max']}
+              defaultValue={[0, 1200000]}
+              min={0}
+              max={1200000}
+              onChange={(val) => filterEntries('priceRange', val)}
+              minW="160"
+              flex="1"
+              ml="2"
+              mr="2"
+              step={1000}
+            >
               <RangeSliderTrack>
                 <RangeSliderFilledTrack />
               </RangeSliderTrack>
               <RangeSliderThumb index={0} />
               <RangeSliderThumb index={1} />
             </RangeSlider>
-            <Text fontSize='sm' ml="2" color="gray.400">2000000</Text>
+            <Text fontSize='sm' ml="2" color="gray.400" minW="72px">${filters.priceRange[1]}</Text>
           </Flex>
         </WrapItem>
-        <WrapItem
+        {/* <WrapItem
           pl={{ base: "0", md: '2' }}
           pr={{ base: "2", md: '0' }}
           w="full"
@@ -138,7 +157,7 @@ export default function Filters({
             />
             <Input type='search' placeholder='Search' bgColor="white" />
           </InputGroup>
-        </WrapItem>
+        </WrapItem> */}
       </Wrap>
     </Box>
   )
