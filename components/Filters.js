@@ -3,7 +3,10 @@ import { ViewIcon, ViewOffIcon, SearchIcon } from '@chakra-ui/icons';
 
 export default function Filters({
   filters,
-  setFilters
+  setFilters,
+  filterEntries,
+  data,
+  rawData
 }) {
   return (
     <Box mt="8">
@@ -64,10 +67,16 @@ export default function Filters({
             m="0"
           >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Condition:</Text>
-            <Select bgColor="white" size="sm" borderRadius="2" color="gray.700">
-              <option value='all'>All</option>
-              <option value='used'>Used</option>
-              <option value='refurbished'>Refurbished</option>
+            <Select
+              bgColor="white"
+              size="sm"
+              borderRadius="2"
+              color="gray.700"
+              onChange={(e) => filterEntries('condition', e.target.value)}
+            >
+              <option value='all'>All ({rawData.length})</option>
+              <option value='used'>Used ({rawData.filter(item => item.type === 'used').length})</option>
+              <option value='refurbished'>Refurbished ({rawData.filter(item => item.type === 'refurbished').length})</option>
             </Select>
           </Flex>
         </WrapItem>
@@ -85,8 +94,8 @@ export default function Filters({
           >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Provider:</Text>
             <Select bgColor="white" size="sm" borderRadius="2" color="gray.700">
-              <option value='all'>All</option>
-              <option value='meli'>Meli</option>
+              <option value='all'>All ({rawData.length})</option>
+              <option value='meli'>Meli ({rawData.filter(item => item.source === 'meli').length})</option>
             </Select>
           </Flex>
         </WrapItem>

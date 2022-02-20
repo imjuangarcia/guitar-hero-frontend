@@ -2,20 +2,17 @@
 import { Grid, GridItem, Image, Heading, Text, Link, IconButton } from '@chakra-ui/react';
 import { StarIcon, ViewOffIcon } from '@chakra-ui/icons';
 
-// Content
-import meli from '../data/meli.json';
-
 // Styles
 import styles from './grid.module.css';
 
-export default function ProductGrid({ filters }) {
+export default function ProductGrid({ data }) {
   return (
     <Grid
       templateColumns={{ sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' }}
       gap={4}
       mt="4"
     >
-      {meli
+      {data
         .map((guitar, index) => 
           <GridItem
             key={index}
