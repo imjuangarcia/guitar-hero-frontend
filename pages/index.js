@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Base from '../components/globals/Base';
 import Header from '../components/globals/Header';
 import Filters from '../components/Filters';
+import Sorting from '../components/Sorting';
 import Grid from '../components/Grid';
 
 export default function Home() {
@@ -24,6 +25,8 @@ export default function Home() {
       <Filters
         filters={filters}
         setFilters={setFilters}
+      />
+      <Sorting
       />
       <Grid
         filters={filters}

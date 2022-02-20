@@ -64,7 +64,7 @@ export default function Filters({
             m="0"
           >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Condition:</Text>
-            <Select bgColor="white" size="sm" borderRadius="2">
+            <Select bgColor="white" size="sm" borderRadius="2" color="gray.700">
               <option value='all'>All</option>
               <option value='used'>Used</option>
               <option value='refurbished'>Refurbished</option>
@@ -84,7 +84,7 @@ export default function Filters({
             m="0"
           >
             <Text fontSize="xs" mr="2" textTransform="uppercase" color="gray.600" letterSpacing="1px">Provider:</Text>
-            <Select bgColor="white" size="sm" borderRadius="2">
+            <Select bgColor="white" size="sm" borderRadius="2" color="gray.700">
               <option value='all'>All</option>
               <option value='meli'>Meli</option>
             </Select>
