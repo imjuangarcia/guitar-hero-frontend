@@ -3,7 +3,9 @@ import { SearchIcon } from '@chakra-ui/icons';
 
 export default function Sorting({
   sorting,
-  sortEntries
+  sortEntries,
+  searchTerm,
+  searchEntries
 }) {
   return (
     <Box mt="8">
@@ -45,7 +47,13 @@ export default function Sorting({
               pointerEvents='none'
               children={<SearchIcon color='gray.300' />}
             />
-            <Input type='search' placeholder='Search' bgColor="white" />
+            <Input
+              type='search'
+              placeholder='Search'
+              bgColor="white"
+              defaultValue={searchTerm}
+              onChange={(e) => searchEntries(e.target.value)}
+            />
           </InputGroup>
         </GridItem>
         <GridItem>
@@ -72,6 +80,7 @@ export default function Sorting({
               variant="flushed"
               color="gray.700"
               onChange={(e) => sortEntries(e.target.value)}
+              defaultValue={sorting}
             >
               <option value='none'>None</option>
               <option value='price-asc'>Price Ascending</option>

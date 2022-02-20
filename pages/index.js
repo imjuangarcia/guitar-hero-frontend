@@ -15,6 +15,7 @@ export default function Home() {
   // State definition
   const [data, setData] = useState(meli);
   const [sorting, setSorting] = useState('none');
+  const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     condition: 'all',
     provider: 'all',
@@ -64,6 +65,13 @@ export default function Home() {
     }
   }
 
+  // Function to search in the JSON file based on the input term
+  const searchEntries = (term) => {
+    setSearchTerm(term);
+
+    setData(meli.filter(item => item.title.includes(term) || item.title.includes(term.toLowerCase()) || item.title.toLowerCase().includes(term) || item.title.toLowerCase().includes(term.toLowerCase())));
+  }
+
   return (
     <Base>
       <Header />
@@ -77,6 +85,8 @@ export default function Home() {
       <Sorting
         sorting={sorting}
         sortEntries={sortEntries}
+        searchTerm={searchTerm}
+        searchEntries={searchEntries}
       />
       <Grid
         data={data}
