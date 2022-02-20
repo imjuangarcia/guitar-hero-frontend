@@ -1,15 +1,24 @@
 import { Text, Box, Wrap, WrapItem, Flex, Select, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, Button, Input, InputLeftElement, InputGroup } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon, SearchIcon } from '@chakra-ui/icons';
 
-export default function Filters() {
+export default function Filters({
+  filters,
+  setFilters
+}) {
   return (
     <Box mt="8">
       <Flex align="baseline">
-        <Text fontWeight="semibold" fontSize="xs" textTransform="uppercase" color="gray.600" letterSpacing="1px">
+        <Text
+          fontWeight="semibold"
+          fontSize="xs"
+          textTransform="uppercase"
+          color="gray.600"
+          letterSpacing="1px"
+        >
           Filters
         </Text>
         <Button
-          leftIcon={<ViewIcon />}
+          leftIcon={filters.showHidden === false ? <ViewIcon /> : <ViewOffIcon />}
           bgColor="transparent"
           fontSize="xs"
           textTransform="uppercase"
@@ -18,12 +27,20 @@ export default function Filters() {
           ml="auto"
           h="auto"
           p="0"
+          _focus={{
+            outline: 'none',
+          }}
+          _active={{
+            background: "transparent",
+            border: 'none',
+          }}
           _hover={{
             background: "transparent",
             color: "gray.600",
           }}
+          onClick={() => setFilters((prevState) => ({ ...prevState, showHidden: !filters.showHidden }))}
         >
-          Show hidden entries
+          {filters.showHidden === false ? 'Show' : 'Hide'} hidden entries
         </Button>
       </Flex>
       <Wrap
