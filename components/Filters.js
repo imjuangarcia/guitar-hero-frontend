@@ -5,7 +5,6 @@ export default function Filters({
   filters,
   setFilters,
   filterEntries,
-  data,
   rawData
 }) {
   return (
@@ -21,7 +20,7 @@ export default function Filters({
           Filters
         </Text>
         <Button
-          leftIcon={filters.showHidden === false ? <ViewIcon /> : <ViewOffIcon />}
+          leftIcon={filters.showHiddenEntries === false ? <ViewIcon /> : <ViewOffIcon />}
           bgColor="transparent"
           fontSize="xs"
           textTransform="uppercase"
@@ -41,9 +40,9 @@ export default function Filters({
             background: "transparent",
             color: "gray.600",
           }}
-          onClick={() => setFilters((prevState) => ({ ...prevState, showHidden: !filters.showHidden }))}
+          onClick={() => setFilters((prevState) => ({ ...prevState, showHiddenEntries: !filters.showHiddenEntries }))}
         >
-          {filters.showHidden === false ? 'Show' : 'Hide'} hidden entries
+          {filters.showHiddenEntries === false ? 'Show' : 'Hide'} hidden entries
         </Button>
       </Flex>
       <Wrap

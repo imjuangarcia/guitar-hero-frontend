@@ -1,5 +1,5 @@
 // Globals
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // Custom Components
 import Base from '../components/globals/Base';
@@ -16,11 +16,12 @@ export default function Home() {
   const [data, setData] = useState(meli);
   const [sorting, setSorting] = useState('none');
   const [searchTerm, setSearchTerm] = useState('');
+  const [specialOption, setSpecialOption] = useState('all');
   const [filters, setFilters] = useState({
     condition: 'all',
     provider: 'all',
     priceRange: [0, 1200000],
-    showHidden: false
+    showHiddenEntries: false
   });
 
   // Set of functions to filter the JSON data based on the parameters selected.
@@ -43,8 +44,10 @@ export default function Home() {
       case 'priceRange':
         setData(meli.filter(product => product.price > value[0] && product.price < value[1]));
         break;
-      // default:
-        // TBD
+      default:
+        // If none of these things are true, reset the filters
+        setData(meli);
+        break;
     }  
   }
 
@@ -59,7 +62,7 @@ export default function Home() {
       case 'price-desc':
         data.sort((a, b) => a.price > b.price ? -1 : 1);
         break;
-      case 'none':
+      default:
         data.sort((a, b) => a.order > b.order ? 1 : -1);
         break;
     }
@@ -69,7 +72,37 @@ export default function Home() {
   const searchEntries = (term) => {
     setSearchTerm(term);
 
-    setData(meli.filter(item => item.title.includes(term) || item.title.includes(term.toLowerCase()) || item.title.toLowerCase().includes(term) || item.title.toLowerCase().includes(term.toLowerCase())));
+    setData(meli.filter(item => item.title.toLowerCase().includes(term.toLowerCase())));
+  }
+
+  // Set of functions to the change special visualization option based on selection
+  const changeSpecialOption = (option) => {
+    setSpecialOption(option);
+    let wordsToLookFor;
+    let matches = [];
+
+    switch(option) {
+      case 'new':
+        // TODO
+        break;
+      case 'favorited':
+        // TODO
+        break;
+      case 'exchange':
+        // 3. Find the entries that accept permutas, canjes, etc.
+        wordsToLookFor = ['permuta', 'permuto', 'permutá', 'permutó', 'permutas', 'canje', 'tomo', 'parte', 'pago', 'menor', 'valor', 'val', 'trueque', 'cambio'];
+        wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
+        setData(matches);
+        break;
+      case 'opportunities':
+        // 4. Find the entries that have opportunity, liquido, etc., words
+        wordsToLookFor = ['oportunidad', 'liquido', 'remato', 'imperdible', 'joya', 'locos', 'viaje', 'urgente', 'rebaja', 'remató', 'líquido', 'regalo', 'regaló'];
+        wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
+        setData(matches);
+        break;
+      default:
+        break;
+    }
   }
 
   return (
@@ -87,6 +120,8 @@ export default function Home() {
         sortEntries={sortEntries}
         searchTerm={searchTerm}
         searchEntries={searchEntries}
+        specialOption={specialOption}
+        changeSpecialOption={changeSpecialOption}
       />
       <Grid
         data={data}

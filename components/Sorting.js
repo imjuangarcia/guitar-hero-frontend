@@ -5,7 +5,9 @@ export default function Sorting({
   sorting,
   sortEntries,
   searchTerm,
-  searchEntries
+  searchEntries,
+  specialOption,
+  changeSpecialOption
 }) {
   return (
     <Box mt="8">
@@ -30,7 +32,13 @@ export default function Sorting({
             >
               View:
             </Text>
-            <Select size="sm" borderRadius="2" color="gray.700">
+            <Select
+              size="sm"
+              borderRadius="2"
+              color="gray.700"
+              defaultValue={specialOption}
+              onChange={(e) => changeSpecialOption(e.target.value)}
+            >
               <option value='all'>All</option>
               <option value='new'>New Entries</option>
               <option value='favorited'>Favorited</option>
