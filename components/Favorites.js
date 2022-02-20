@@ -5,7 +5,7 @@ import { StarIcon, ViewOffIcon } from '@chakra-ui/icons';
 // Styles
 import styles from './grid.module.css';
 
-export default function ProductGrid({ 
+export default function Favorites({ 
   data,
   storeFavorite
 }) {
@@ -33,10 +33,10 @@ export default function ProductGrid({
               position="relative"
             >
               <IconButton
-                aria-label='Favorite this guitar'
+                aria-label='Remove this guitar from favorites'
                 icon={<StarIcon />}
-                color="white"
-                bgColor="transparent"
+                color="yellow.400"
+                bgColor="white"
                 border="solid"
                 borderWidth="1px"
                 borderColor="gray.100"
@@ -45,8 +45,8 @@ export default function ProductGrid({
                 top="2"
                 right="14"
                 _hover={{
-                  background: "white",
-                  color: "yellow.400",
+                  background: "transparent",
+                  color: "white",
                 }}
                 onClick={(e) => storeFavorite(e, guitar)}
               />

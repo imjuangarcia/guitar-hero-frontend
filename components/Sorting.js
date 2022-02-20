@@ -7,7 +7,7 @@ export default function Sorting({
   searchTerm,
   searchEntries,
   specialOption,
-  changeSpecialOption
+  changeSpecialOption,
 }) {
   return (
     <Box mt="8">
@@ -36,12 +36,12 @@ export default function Sorting({
               size="sm"
               borderRadius="2"
               color="gray.700"
-              defaultValue={specialOption}
+              value={specialOption}
               onChange={(e) => changeSpecialOption(e.target.value)}
             >
               <option value='all'>All</option>
               <option value='new'>New Entries</option>
-              <option value='favorited'>Favorited</option>
+              <option value='favorites'>Favorites</option>
               <option value='exchange'>Exchange friendly</option>
               <option value='opportunities'>Opportunities</option>
             </Select>

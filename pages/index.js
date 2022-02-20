@@ -1,5 +1,5 @@
 // Globals
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Custom Components
 import Base from '../components/globals/Base';
@@ -7,6 +7,7 @@ import Header from '../components/globals/Header';
 import Filters from '../components/Filters';
 import Sorting from '../components/Sorting';
 import Grid from '../components/Grid';
+import Favorites from '../components/Favorites';
 
 // Content
 import meli from '../data/meli.json';
@@ -17,6 +18,7 @@ export default function Home() {
   const [sorting, setSorting] = useState('none');
   const [searchTerm, setSearchTerm] = useState('');
   const [specialOption, setSpecialOption] = useState('all');
+  const [favorites, setFavorites] = useState([]);
   const [filters, setFilters] = useState({
     condition: 'all',
     provider: 'all',
@@ -85,8 +87,10 @@ export default function Home() {
       case 'new':
         // TODO
         break;
-      case 'favorited':
-        // TODO
+      case 'favorites':
+        // 2. Find the entries that are favorited
+        favorites.map(favorite => meli.filter(item => item.id === favorite.id ? matches.push(item) : ''));
+        setData(matches);
         break;
       case 'exchange':
         // 3. Find the entries that accept permutas, canjes, etc.
@@ -101,9 +105,44 @@ export default function Home() {
         setData(matches);
         break;
       default:
+        // If none of these things are true, reset the filters
+        setData(meli);
         break;
     }
   }
+
+  // Function to store favorties
+  const storeFavorite = (e, guitar) => {
+    e.preventDefault();
+
+    let array = favorites;
+    const isFavoriteInArray = array.findIndex(favorite => favorite.id === guitar.id);
+    
+    if(isFavoriteInArray > -1) {
+      // If the guitar is on the array, remove it
+      array.splice(isFavoriteInArray, 1);
+
+      // If we are on the 'favorites' dropdown menu option, and we removed an item, move back to 'all'
+      if(specialOption === 'favorites') {
+        changeSpecialOption('all');
+      }
+    } else {
+      // If not, add it
+      array.push(guitar);
+    }
+    
+    // Store in localStorage and state
+    localStorage.setItem('favorites', JSON.stringify(array));
+    setFavorites(array);
+  }
+
+  useEffect(() => {
+    // To get the favorites from localStorage
+    const localFavorites = localStorage.getItem('favorites');
+    if(localFavorites) {
+      setFavorites(JSON.parse(localFavorites));
+    }
+  }, []);
 
   return (
     <Base>
@@ -123,9 +162,17 @@ export default function Home() {
         specialOption={specialOption}
         changeSpecialOption={changeSpecialOption}
       />
-      <Grid
-        data={data}
-      />
+      {specialOption === 'favorites' ?
+        <Favorites
+          data={data}
+          storeFavorite={storeFavorite}
+        />
+      :
+        <Grid
+          data={data}
+          storeFavorite={storeFavorite}
+        />
+      }
     </Base>
   )
 }
