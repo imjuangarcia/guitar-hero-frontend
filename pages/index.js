@@ -7,7 +7,6 @@ import Header from '../components/globals/Header';
 import Filters from '../components/Filters';
 import Sorting from '../components/Sorting';
 import Grid from '../components/Grid';
-import Favorites from '../components/Favorites';
 
 // Content
 import meli from '../data/meli.json';
@@ -90,6 +89,7 @@ export default function Home() {
       case 'favorites':
         // 2. Find the entries that are favorited
         favorites.map(favorite => meli.filter(item => item.id === favorite.id ? matches.push(item) : ''));
+        setFavorites(matches);
         setData(matches);
         break;
       case 'exchange':
@@ -121,11 +121,6 @@ export default function Home() {
     if(isFavoriteInArray > -1) {
       // If the guitar is on the array, remove it
       array.splice(isFavoriteInArray, 1);
-
-      // If we are on the 'favorites' dropdown menu option, and we removed an item, move back to 'all'
-      if(specialOption === 'favorites') {
-        changeSpecialOption('all');
-      }
     } else {
       // If not, add it
       array.push(guitar);
@@ -134,6 +129,9 @@ export default function Home() {
     // Store in localStorage and state
     localStorage.setItem('favorites', JSON.stringify(array));
     setFavorites(array);
+    
+    // Not an elegant solution, but we do this to ensure that, when adding or deleting a favorite, we get the updated style and count for the favorites
+    window.location.reload();
   }
 
   useEffect(() => {
@@ -162,17 +160,11 @@ export default function Home() {
         specialOption={specialOption}
         changeSpecialOption={changeSpecialOption}
       />
-      {specialOption === 'favorites' ?
-        <Favorites
-          data={data}
-          storeFavorite={storeFavorite}
-        />
-      :
-        <Grid
-          data={data}
-          storeFavorite={storeFavorite}
-        />
-      }
+      <Grid
+        data={data}
+        favorites={favorites}
+        storeFavorite={storeFavorite}
+      />
     </Base>
   )
 }

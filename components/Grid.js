@@ -1,12 +1,12 @@
 // Chakra components
-import { Grid, GridItem, Image, Heading, Text, Link, IconButton } from '@chakra-ui/react';
-import { StarIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { Grid } from '@chakra-ui/react';
 
-// Styles
-import styles from './grid.module.css';
+// Custom components
+import GuitarItem from './Item';
 
 export default function ProductGrid({ 
   data,
+  favorites,
   storeFavorite
 }) {
   return (
@@ -17,85 +17,22 @@ export default function ProductGrid({
     >
       {data
         .map((guitar, index) => 
-          <GridItem
+        favorites.find(favorite => favorite.id.includes(guitar.id)) ?
+          <GuitarItem
             key={index}
-            border="solid"
-            borderWidth="1px"
-            borderColor="gray.100"
-            borderRadius="8"
-            className={styles.Container}
-          >
-            <Link
-              href={guitar.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              display="block"
-              position="relative"
-            >
-              <IconButton
-                aria-label='Favorite this guitar'
-                icon={<StarIcon />}
-                color="white"
-                bgColor="transparent"
-                border="solid"
-                borderWidth="1px"
-                borderColor="gray.100"
-                borderRadius="4"
-                position="absolute"
-                top="2"
-                right="14"
-                _hover={{
-                  background: "white",
-                  color: "yellow.400",
-                }}
-                onClick={(e) => storeFavorite(e, guitar)}
-              />
-              <IconButton
-                aria-label='Hide this guitar'
-                icon={<ViewOffIcon />}
-                color="white"
-                bgColor="transparent"
-                border="solid"
-                borderWidth="1px"
-                borderColor="gray.100"
-                borderRadius="4"
-                position="absolute"
-                top="2"
-                right="2"
-                _hover={{
-                  background: "white",
-                  color: "gray.500",
-                }}
-              />
-              <Image
-                src={guitar.image}
-                alt={guitar.title}
-                objectFit="cover"
-                h="220"
-                w="100%"
-                borderTopLeftRadius="8"
-                borderTopRightRadius="8"
-              />
-            </Link>
-            <Link
-              href={guitar.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              display="block"
-              p="2"
-              _hover={{
-                textDecoration: 'none'
-              }}
-            >
-              <Heading size="sm" color="gray.900" mt="1">
-                {guitar.title}
-              </Heading>
-              <Text mt="1" color="gray.600">
-                ${guitar.price}
-              </Text>
-            </Link>
-          </GridItem>
-      )}
+            guitar={guitar}
+            storeFavorite={storeFavorite}
+            isFavorite={true}
+          />
+        :
+          <GuitarItem
+            key={index}
+            guitar={guitar}
+            storeFavorite={storeFavorite}
+            isFavorite={false}
+          />
+        )
+      }
     </Grid>
   )
 }
