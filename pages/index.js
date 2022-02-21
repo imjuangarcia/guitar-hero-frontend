@@ -93,20 +93,26 @@ export default function Home() {
         setFavorites(matches);
         setData(matches);
         break;
+      case 'hidden':
+        // 3. Find the entries that are hidden
+        hiddenItems.map(hiddenItem => meli.filter(item => item.id === hiddenItem.id ? matches.push(item) : ''));
+        setHiddenItems(matches);
+        setData(matches);
+        break;
       case 'exchange':
-        // 3. Find the entries that accept permutas, canjes, etc.
+        // 4. Find the entries that accept permutas, canjes, etc.
         wordsToLookFor = ['permuta', 'permuto', 'permutá', 'permutó', 'permutas', 'canje', 'tomo', 'parte', 'pago', 'menor', 'valor', 'val', 'trueque', 'cambio'];
         wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
         setData(matches);
         break;
       case 'opportunities':
-        // 4. Find the entries that have opportunity, liquido, etc., words
+        // 5. Find the entries that have opportunity, liquido, etc., words
         wordsToLookFor = ['oportunidad', 'liquido', 'remato', 'imperdible', 'joya', 'locos', 'viaje', 'urgente', 'rebaja', 'remató', 'líquido', 'regalo', 'regaló'];
         wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
         setData(matches);
         break;
       case 'cripto':
-        // 5. Find the entries that have crypto related words
+        // 6. Find the entries that have crypto related words
         wordsToLookFor = ['cripto', 'crypto', 'criptomoneda', 'cryptomoneda', 'criptomoney', 'cryptomoney', 'btc', 'bitcoin', 'eth'];
         wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
         setData(matches);
@@ -203,6 +209,7 @@ export default function Home() {
         storeFavorite={storeFavorite}
         hiddenItems={hiddenItems}
         hideItem={hideItem}
+        specialOption={specialOption}
       />
     </Base>
   )

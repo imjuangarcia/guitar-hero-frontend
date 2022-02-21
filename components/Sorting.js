@@ -41,6 +41,7 @@ export default function Sorting({
             >
               <option value='all'>All</option>
               <option value='new'>New Entries</option>
+              <option value='hidden'>Hidden Entries</option>
               <option value='favorites'>Favorites</option>
               <option value='exchange'>Exchange friendly</option>
               <option value='opportunities'>Opportunities</option>

@@ -10,7 +10,8 @@ export default function ProductGrid({
   storeFavorite,
   hiddenItems,
   hideItem,
-  filters
+  filters,
+  specialOption
 }) {
   return (
     <Grid
@@ -29,6 +30,7 @@ export default function ProductGrid({
               isFavorite={favorites.find(favorite => favorite.id.includes(guitar.id) ? true : false)}
               isHidden={hiddenItems.find(item => item.id.includes(guitar.id)) === undefined ? false : true}
               filters={filters}
+              specialOption={specialOption}
             />
           )}
         )

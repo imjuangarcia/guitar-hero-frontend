@@ -11,9 +11,10 @@ export default function GuitarItem({
   isFavorite,
   isHidden,
   hideItem,
-  filters
+  filters,
+  specialOption
 }) {
-  if(isHidden === false || filters.showHiddenEntries === true) {
+  if(isHidden === false || filters.showHiddenEntries === true || specialOption === 'hidden') {
     return (
       <GridItem
         border="solid"
