@@ -104,6 +104,12 @@ export default function Home() {
         wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
         setData(matches);
         break;
+      case 'cripto':
+        // 5. Find the entries that have crypto related words
+        wordsToLookFor = ['cripto', 'crypto', 'criptomoneda', 'cryptomoneda', 'criptomoney', 'cryptomoney', 'btc', 'bitcoin', 'eth'];
+        wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
+        setData(matches);
+        break;
       default:
         // If none of these things are true, reset the filters
         setData(meli);

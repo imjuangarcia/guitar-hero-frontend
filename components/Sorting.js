@@ -44,6 +44,7 @@ export default function Sorting({
               <option value='favorites'>Favorites</option>
               <option value='exchange'>Exchange friendly</option>
               <option value='opportunities'>Opportunities</option>
+              <option value='cripto'>Crypto-Friendly</option>
             </Select>
           </Flex>
         </GridItem>
