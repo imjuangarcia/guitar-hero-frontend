@@ -18,6 +18,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [specialOption, setSpecialOption] = useState('all');
   const [favorites, setFavorites] = useState([]);
+  const [hiddenItems, setHiddenItems] = useState([]);
   const [filters, setFilters] = useState({
     condition: 'all',
     provider: 'all',
@@ -139,12 +140,41 @@ export default function Home() {
     // Not an elegant solution, but we do this to ensure that, when adding or deleting a favorite, we get the updated style and count for the favorites
     window.location.reload();
   }
+  
+  // Function to hide items
+  const hideItem = (e, guitar) => {
+    e.preventDefault();
+
+    let array = hiddenItems;
+    const isItemInArray = array.findIndex(item => item.id === guitar.id);
+    
+    if(isItemInArray > -1) {
+      // If the guitar is on the array, remove it
+      array.splice(isItemInArray, 1);
+    } else {
+      // If not, add it
+      array.push(guitar);
+    }
+    
+    // Store in localStorage and state
+    localStorage.setItem('hiddenItems', JSON.stringify(array));
+    setHiddenItems(array);
+    
+    // Not an elegant solution, but we do this to ensure that, when adding or deleting a favorite, we get the updated style and count for the favorites
+    window.location.reload();
+  }
 
   useEffect(() => {
     // To get the favorites from localStorage
     const localFavorites = localStorage.getItem('favorites');
     if(localFavorites) {
       setFavorites(JSON.parse(localFavorites));
+    }
+
+    // To get the hidden items from localStorage
+    const localHiddenItems = localStorage.getItem('hiddenItems');
+    if(localHiddenItems) {
+      setHiddenItems(JSON.parse(localHiddenItems));
     }
   }, []);
 
@@ -168,8 +198,11 @@ export default function Home() {
       />
       <Grid
         data={data}
+        filters={filters}
         favorites={favorites}
         storeFavorite={storeFavorite}
+        hiddenItems={hiddenItems}
+        hideItem={hideItem}
       />
     </Base>
   )

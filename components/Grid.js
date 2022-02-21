@@ -7,7 +7,10 @@ import GuitarItem from './Item';
 export default function ProductGrid({ 
   data,
   favorites,
-  storeFavorite
+  storeFavorite,
+  hiddenItems,
+  hideItem,
+  filters
 }) {
   return (
     <Grid
@@ -16,21 +19,18 @@ export default function ProductGrid({
       mt="4"
     >
       {data
-        .map((guitar, index) => 
-        favorites.find(favorite => favorite.id.includes(guitar.id)) ?
-          <GuitarItem
-            key={index}
-            guitar={guitar}
-            storeFavorite={storeFavorite}
-            isFavorite={true}
-          />
-        :
-          <GuitarItem
-            key={index}
-            guitar={guitar}
-            storeFavorite={storeFavorite}
-            isFavorite={false}
-          />
+        .map((guitar, index) => {
+          return (
+            <GuitarItem
+              key={index}
+              guitar={guitar}
+              storeFavorite={storeFavorite}
+              hideItem={hideItem}
+              isFavorite={favorites.find(favorite => favorite.id.includes(guitar.id) ? true : false)}
+              isHidden={hiddenItems.find(item => item.id.includes(guitar.id)) === undefined ? false : true}
+              filters={filters}
+            />
+          )}
         )
       }
     </Grid>
