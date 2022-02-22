@@ -101,13 +101,13 @@ export default function Home() {
         break;
       case 'exchange':
         // 4. Find the entries that accept permutas, canjes, etc.
-        wordsToLookFor = ['permuta', 'permuto', 'permutá', 'permutó', 'permutas', 'canje', 'tomo', 'parte', 'pago', 'menor', 'valor', 'val', 'trueque', 'cambio'];
+        wordsToLookFor = ['permuta', 'permuto', 'permutá', 'permutó', 'permutas', 'canje', 'tomo', 'parte', 'pago', 'menor', 'valor', 'val', 'trueque', 'cambio', 'men'];
         wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
         setData(matches);
         break;
       case 'opportunities':
         // 5. Find the entries that have opportunity, liquido, etc., words
-        wordsToLookFor = ['oportunidad', 'liquido', 'remato', 'imperdible', 'joya', 'locos', 'viaje', 'urgente', 'rebaja', 'remató', 'líquido', 'regalo', 'regaló'];
+        wordsToLookFor = ['oportunidad', 'liquido', 'remato', 'imperdible', 'joya', 'locos', 'viaje', 'urgente', 'rebaja', 'remató', 'líquido', 'regalo', 'regaló', 'exhibicion', 'reparar', 'exhibición', 'reparado', 'reparada', 'restaurar', 'restaurada', 'promocion', 'promoción', 'promo'];
         wordsToLookFor.map(word => meli.filter(item => item.title.toLowerCase().includes(word) ? matches.push(item) : ''));
         setData(matches);
         break;
